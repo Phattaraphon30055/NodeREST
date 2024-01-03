@@ -9,15 +9,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Worakanya2545/nodeREST.git"
+        "url": "git+https://github.com/Phattaraphon30055/nodeREST.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/Worakanya2545/nodeREST/issues"
+        "url": "https://github.com/Phattaraphon30055/nodeREST/issues"
     },
-    "homepage": "https://github.com/Worakanya2545/nodeREST#readme",
+    "homepage": "https://github.com/Phattaraphon30055/nodeREST#readme",
     "dependencies": {
         "dotenv": "^16.0.3",
         "prettier": "^2.8.3"

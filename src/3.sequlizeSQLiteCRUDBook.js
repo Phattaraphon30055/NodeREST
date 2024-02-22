@@ -1,14 +1,22 @@
+
+
+
+
+
 const express = require('express');
 const Sequelize = require('sequelize');
 const app = express();
 
+
 app.use(express.json());
 
+
 const sequelize = new Sequelize('database', 'username', 'password', {
-    host: 'localhost',
-    dialect: 'sqlite',
-    storage: './Database/SQBooks.sqlite'
+    host : 'localhost',
+    dialect : 'sqlite',
+    storage : './Database/SQBooks.sqlite'
 });
+
 
 const Book = sequelize.define('book', {
     id: {
@@ -26,10 +34,11 @@ const Book = sequelize.define('book', {
     }
 });
 
+
 sequelize.sync();
 
-// route to get all books
-app.get('/books', (reg, res) => {
+
+app.get('/books', (req, res) => {
     Book.findAll().then(books => {
         res.json(books);
     }).catch(err => {
@@ -37,17 +46,19 @@ app.get('/books', (reg, res) => {
     });
 });
 
+
 app.get('/books/:id', (req, res) => {
-    book.findByPk(req.params.id).then(book => {
+    Book.findByPk(req.params.id).then(book => {
         if (!book) {
             res.status(404).send('Book not found');
         }else {
             res.json(book);
         }
     }).catch(err => {
-        express.status(500).send(err);
+        res.status(500).send(err);
     });
 });
+
 
 app.post('/books', (req, res) => {
     Book.create(req.body).then(book => {
@@ -57,13 +68,14 @@ app.post('/books', (req, res) => {
     });
 });
 
+
 app.put('/books/:id', (req, res) => {
-    Book.findByPk(req.params.is).then(book => {
+    Book.findByPk(req.params.id).then(book => {
         if (!book) {
             res.status(404).send('Book not found');
         }else {
             book.update(req.body).then(() => {
-                res.send(book);
+                res.dend(book);
             }).catch(err => {
                 res.status(500).send(err);
             });
@@ -73,13 +85,13 @@ app.put('/books/:id', (req, res) => {
     });
 });
 
-//route to delete a book
-app.delete("/books/:id", (req, res) => {
-    Book.findByPk(req.params.id).then(book =>{
+
+app.delete('/books/:id', (req, res) => {
+    Book.findByPk(req.params.id).then(book => {
         if (!book) {
-            res.status(404).send("Book not found");
-        }else{
-            book.destroy().then(() =>{
+            res.status(404).send('Book not found');
+        }else {
+            book.destroy().then(() => {
                 res.send({});
             }).catch(err => {
                 res.status(500).send(err);
@@ -90,6 +102,6 @@ app.delete("/books/:id", (req, res) => {
     });
 });
 
-//start the server
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
